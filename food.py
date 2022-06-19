@@ -1,15 +1,17 @@
 from turtle import Turtle
 import random
 
-class Food():
+class Food(Turtle):
     def __init__(self):
+        super().__init__()
+        self.shape("turtle")
+        self.color("yellow")
+        self.shapesize(1, 1)
+        self.penup()
+        self.refresh()
 
-        x_cor = random.randint(-460, 460)
-        y_cor = random.randint(-460, 460)
 
-        turtle = Turtle()
-        turtle.shape("turtle")
-        turtle.color("Green")
-        turtle.shapesize(1, 1)
-        turtle.penup()
-        turtle.goto(x_cor, y_cor)
+    def refresh(self):
+        x_cor = random.randint(-350, 350)
+        y_cor = random.randint(-350, 350)
+        self.goto(x_cor, y_cor)
