@@ -4,7 +4,7 @@ class Snake():
         self.snake_segment = []
         self.create_segment()
         self.head = self.snake_segment[0]
-
+        self.tail = self.snake_segment[-1]
 
     def create_segment(self):
         x_coordinate = 0
@@ -20,22 +20,12 @@ class Snake():
             x_coordinate = x_coordinate - 20
 
     def move(self):
-        x = 1
-        self.snake_segment[0].forward(2)
-        while x < len(self.snake_segment):
-            last_x_coordinate = self.snake_segment[x - 1].xcor()
-            last_y_coordinate = self.snake_segment[x - 1].ycor()
+        for x in range(len(self.snake_segment) -1, 0, -1):
+            new_x = self.snake_segment[x - 1].xcor()
+            new_y = self.snake_segment[x - 1].ycor()
+            self.snake_segment[x].goto(new_x, new_y)
+        self.snake_segment[0].forward(20)
 
-            if self.snake_segment[0].heading() == 0:
-                self.snake_segment[x].goto(last_x_coordinate - 20, last_y_coordinate)
-            if self.snake_segment[0].heading() == 90:
-                self.snake_segment[x].goto(last_x_coordinate, last_y_coordinate - 20)
-            if self.snake_segment[0].heading() == 270:
-                self.snake_segment[x].goto(last_x_coordinate, last_y_coordinate + 20)
-            if self.snake_segment[0].heading() == 180:
-                self.snake_segment[x].goto(last_x_coordinate + 20, last_y_coordinate)
-
-            x += 1
 
     # Set Controls
     def move_up(self):
@@ -74,3 +64,10 @@ class Snake():
 
         self.snake_segment.append(self.new_turtle)
 
+    def check_collision(self):
+        for x in self.snake_segment[1:]:
+            if self.head.distance(x) < 10:
+                collision = True
+            else:
+                collision = False
+        return collision

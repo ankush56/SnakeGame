@@ -10,7 +10,7 @@ class Snake_screen():
         screen1 = Screen()
         screen1.setup(width, height)
         screen1.bgcolor("black")
-        screen1.title("Snake Game")
+        screen1.title("Green Anaconda")
         screen1.listen()
         screen1.tracer(0)
         return screen1
